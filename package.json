@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "axios": "^0.21.4",
+    "echarts": "^5.2.0",
+    "vue-count-to": "^1.0.13"
+  }
+}
