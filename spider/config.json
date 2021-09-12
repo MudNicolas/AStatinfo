@@ -1,7 +1,10 @@
 {
-    "Diana": {
-        "name": "Diana",
-        "stat": "https://api.bilibili.com/x/space/upstat?mid=672328094",
-        "info": "https://api.bilibili.com/x/relation/stat?vmid=672328094"
-    }
+    "info": "https://api.bilibili.com/x/relation/stat?vmid=",
+    "stat": "https://api.bilibili.com/x/space/upstat?mid=",
+    "query": [
+        {
+            "name": "DIANA",
+            "uid": 672328094
+        }
+    ]
 }

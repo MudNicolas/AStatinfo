@@ -14,17 +14,14 @@
             </div>
             <div class="item">
                 <span class="title">{{ person.fansName }}数</span>
-                <span class="content">
-                    <img :src="person.fansIcon" class="fans-icon" />
-                    <countTo :startVal="0" :endVal="1000000" :duration="2000"></countTo>
-                </span>
-            </div>
-            <div class="item">
-                播放数
                 <countTo :startVal="0" :endVal="1000000" :duration="2000"></countTo>
             </div>
             <div class="item">
-                获赞数
+                <span class="title">播放数</span>
+                <countTo :startVal="0" :endVal="1000000" :duration="2000"></countTo>
+            </div>
+            <div class="item">
+                <span class="title">获赞数</span>
                 <countTo :startVal="0" :endVal="1000000" :duration="2000"></countTo>
             </div>
         </div>
@@ -33,11 +30,19 @@
 
 <script>
 import countTo from "vue-count-to"
+
 export default {
     props: {
         person: Object,
     },
     components: { countTo },
+    data() {
+        let fansIconFile = `${this.person.name}_FANS.svg`
+        let fansIcon = import("@/assets/" + fansIconFile)
+        return {
+            fansIcon,
+        }
+    },
     created() {
         this.changeAvatarpersonalColor()
     },
@@ -90,9 +95,13 @@ $personalColor: var(--border-color, #fff);
 
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            font-size: 24px;
 
             .title {
-                font-size: 24px;
+                font-size: 18px;
             }
             .content {
                 display: flex;
