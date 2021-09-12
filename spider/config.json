@@ -3,8 +3,24 @@
     "stat": "https://api.bilibili.com/x/space/upstat?mid=",
     "query": [
         {
+            "name": "AVA",
+            "uid": 672346917
+        },
+        {
+            "name": "BELLA",
+            "uid": 672353429
+        },
+        {
+            "name": "CAROL",
+            "uid": 351609538
+        },
+        {
             "name": "DIANA",
             "uid": 672328094
+        },
+        {
+            "name": "ELIEEN",
+            "uid": 672342685
         }
     ]
 }

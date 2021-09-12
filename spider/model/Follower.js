@@ -6,4 +6,4 @@ let followerSchemas = new mongoose.Schema({
     numberFollowers: Number,
 })
 
-export default mongoose.model("Follower", followerSchemas)
+module.exports = mongoose.model("Follower", followerSchemas)

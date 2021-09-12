@@ -1,11 +1,14 @@
 let request = require("request")
 let config = require("./config.json")
 let schedule = require("node-schedule")
+let mongoose = require("mongoose")
 let Follower = require("./model/Follower.js")
 
-var timer = new schedule.RecurrenceRule()
-timer.minute = [0, 10, 20, 30, 40, 50]
-schedule.scheduleJob(timer, spider)
+function timer() {
+    let rule = new schedule.RecurrenceRule()
+    rule.minute = [0, 10, 20, 30, 40, 50]
+    schedule.scheduleJob(rule, spider)
+}
 
 function spider() {
     let { query } = config
@@ -20,17 +23,32 @@ function spider() {
 
         request.get(option, (err, response, body) => {
             let { follower } = JSON.parse(body).data
+
             new Follower({
                 name: e.name,
                 time: new Date(),
                 numberFollowers: follower,
-            }).save(err, r => {
+            }).save(err => {
                 if (err) {
                     console.log(err)
                     return
                 }
-                console.log(r.name, " ", r.time)
             })
         })
     })
 }
+
+let mongoUrl = "mongodb://localhost:27999/AStatinfo"
+let options = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}
+
+mongoose.connect(mongoUrl, options, function (err) {
+    if (err) {
+        console.log(err)
+    } else {
+        console.log("success")
+        timer()
+    }
+})
