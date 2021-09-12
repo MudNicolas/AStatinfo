@@ -33,6 +33,7 @@ function spider() {
                     console.log(err)
                     return
                 }
+                console.log(new Date(), " done")
             })
         })
     })
