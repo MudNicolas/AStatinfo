@@ -3,7 +3,12 @@
         <Nav :config="config" @updateKey="updateKey" />
         <transition name="slide" mode="out-in">
             <Acao v-if="!activeKey" />
-            <Statinfo v-else :person="config[activeKey]" />
+            <Statinfo
+                v-for="e of config"
+                v-if="config[activeKey] && e.name === config[activeKey].name"
+                :key="e.name"
+                :person="config[activeKey]"
+            />
         </transition>
         <Footer />
     </div>
