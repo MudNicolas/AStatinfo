@@ -1,5 +1,5 @@
 <template>
-    <div :class="className" :style="{ height: height, width: width }" />
+    <div :class="className" class="chat-area" />
 </template>
 
 <script>
@@ -29,14 +29,7 @@ export default {
             type: String,
             default: "chart",
         },
-        width: {
-            type: String,
-            default: "100%",
-        },
-        height: {
-            type: String,
-            default: "600px",
-        },
+
         color: {
             type: String,
             default: "#9AC8E2",
@@ -78,8 +71,9 @@ export default {
                     },
                 },
                 grid: {
-                    x: 0,
-                    x2: 0,
+                    x: 70,
+                    x2: 10,
+                    y2: 20,
                 },
                 xAxis: {
                     type: "category",
@@ -107,13 +101,11 @@ export default {
                                 },
                             ]),
                         },
+                        lineStyle: {
+                            color: this.color,
+                        },
                         itemStyle: {
-                            normal: {
-                                color: this.color,
-                                lineStyle: {
-                                    color: this.color,
-                                },
-                            },
+                            color: this.color,
                         },
                         smooth: true,
                     },
@@ -126,5 +118,20 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+@media only screen and (max-device-width: 800px) {
+    .chat-area {
+        height: 300px;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .chat-area {
+        height: 600px;
+    }
+}
+
+.chat-area {
+    width: 100%;
+}
 </style>

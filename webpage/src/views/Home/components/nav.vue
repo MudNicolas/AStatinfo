@@ -1,5 +1,5 @@
 <template>
-    <div class="contaner">
+    <div class="container">
         <div
             v-for="i of config"
             class="item"
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.contaner {
+.container {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -59,6 +59,7 @@ export default {
 
         .label {
             left: 6px;
+            top: 6px;
             letter-spacing: 6px;
             position: absolute;
             color: #fff;

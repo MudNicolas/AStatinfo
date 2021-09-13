@@ -24,8 +24,8 @@ export default {
     color: #000;
     display: flex;
     justify-content: center;
-    margin-top: 100px;
-    margin-bottom: 20px;
+    margin-top: 50px;
+    padding-bottom: 20px;
 
     img {
         margin-right: 8px;
