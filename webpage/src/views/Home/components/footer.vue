@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a target="_blank" :href="link">
+        <a target="_blank" :href="link" class="my-link">
             <img src="//www.bilibili.com/favicon.ico" width="20px" />
             {{ message }}
         </a>
@@ -18,8 +18,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scpoed>
-a {
+<style lang="scss" scpoed >
+.my-link {
     text-decoration: none;
     color: #000;
     display: flex;

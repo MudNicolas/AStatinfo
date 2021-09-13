@@ -30,6 +30,7 @@
                 <span class="forecast">2020.02.02</span>
             </div>
         </div>
+        <range-picker />
         <Charts :color="person.color" :title="person.fansName" />
     </div>
 </template>
@@ -37,12 +38,14 @@
 <script>
 import countTo from "vue-count-to"
 import Charts from "@/components/Charts"
+import { DatePicker, Input as aInput } from "ant-design-vue"
+const { RangePicker } = DatePicker
 
 export default {
     props: {
         person: Object,
     },
-    components: { countTo, Charts },
+    components: { countTo, Charts, RangePicker, aInput },
 
     created() {
         this.changeAvatarpersonalColor()
@@ -92,7 +95,7 @@ $personalColor: var(--border-color, #fff);
 
         .item {
             border-left: 6px solid $personalColor;
-
+            color: #606266;
             margin: 10px 30px;
             display: flex;
             flex-direction: column;

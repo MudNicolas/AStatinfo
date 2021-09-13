@@ -84,14 +84,15 @@ export default {
                 xAxis: {
                     type: "category",
                     boundaryGap: false,
-                    data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                    data: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
                 },
                 yAxis: {
                     type: "value",
                 },
+
                 series: [
                     {
-                        data: [820, 932, 901, 934, 1290, 1330, 1320],
+                        data: [820, 932, 901, 934, 1290, 1330, 1320, 1245, 2353464, 45758, 124, 55],
                         type: "line",
                         areaStyle: {
                             opacity: 0.8,
