@@ -1,4 +1,5 @@
 {
     "port": 9999,
-    "mongoUrl": "mongodb://localhost:27999/AStatinfo"
+    "mongoUrl": "mongodb://localhost:27999/AStatinfo",
+    "forecastDayRange": 7
 }

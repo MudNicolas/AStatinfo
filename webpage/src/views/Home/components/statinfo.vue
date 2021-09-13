@@ -15,7 +15,7 @@
             <div class="item">
                 <span class="title">{{ person.fansName }}</span>
                 <svg-icon :icon-class="`${person.name}_FANS`" style="margin: 8px" />
-                <countTo :startVal="0" :endVal="1000000" :duration="2000"></countTo>
+                <countTo :startVal="startVal" :endVal="endVal" :duration="2000"></countTo>
             </div>
             <div class="item">
                 <span class="title">预计五十万粉时间</span>
@@ -33,14 +33,16 @@
         <div class="toolbar">
             <span class="tip">数据查看范围</span>
             <span class="picker">
-                <config-provider :locale="locale">
-                    <range-picker
-                        :show-time="true"
-                        :ranges="quickRange"
-                        v-model="timeRange"
-                        @ok="timeRangeChange"
-                    />
-                </config-provider>
+                <el-date-picker
+                    v-model="timeRange"
+                    :picker-options="quickRange"
+                    type="datetimerange"
+                    range-separator="~"
+                    start-placeholder="开始日期"
+                    end-placeholder="结束日期"
+                    size="small"
+                    @change="timeRangeChange"
+                ></el-date-picker>
             </span>
         </div>
         <Charts :color="person.color" :title="person.fansName" />
@@ -50,36 +52,95 @@
 <script>
 import countTo from "vue-count-to"
 import Charts from "@/components/Charts"
-import { DatePicker, Input as aInput, ConfigProvider, Message } from "ant-design-vue"
-import moment from "moment"
-import zhCN from "ant-design-vue/lib/locale-provider/zh_CN"
-
-const { RangePicker } = DatePicker
+import dayjs from "dayjs"
+import { getRealTimeFansNumber } from "@/api/remote"
 
 export default {
     props: {
         person: Object,
     },
-    components: { countTo, Charts, RangePicker, aInput, ConfigProvider },
+    components: { countTo, Charts },
     data() {
         return {
-            locale: zhCN,
             quickRange: {
-                今日: [moment("00:00:00", "HH:mm:ss"), moment()],
-                一周内: [moment().day(-6), moment()],
-                一个月内: [moment().add(-1, "month"), moment()],
-                一季度内: [moment().add(-3, "month"), moment()],
-                半年内: [moment().add(-6, "month"), moment()],
-                一年内: [moment().add(-1, "year"), moment()],
-                十年内: [moment().add(-10, "year"), moment()],
-                一伯年内: [moment().add(-100, "year"), moment()],
+                shortcuts: [
+                    {
+                        text: "今日",
+                        onClick(picker) {
+                            const end = dayjs()
+                            const start = dayjs().set("hour", 0).set("minute", 0).set("second", 0)
+                            picker.$emit("pick", [start, end])
+                        },
+                    },
+                    {
+                        text: "一周内",
+                        onClick(picker) {
+                            const end = dayjs()
+                            const start = dayjs().add(-7, "day")
+                            picker.$emit("pick", [start, end])
+                        },
+                    },
+                    {
+                        text: "一个月内",
+                        onClick(picker) {
+                            const end = dayjs()
+                            const start = dayjs().add(-1, "month")
+                            picker.$emit("pick", [start, end])
+                        },
+                    },
+                    {
+                        text: "三个月内",
+                        onClick(picker) {
+                            const end = dayjs()
+                            const start = dayjs().add(-3, "month")
+                            picker.$emit("pick", [start, end])
+                        },
+                    },
+                    {
+                        text: "半年内",
+                        onClick(picker) {
+                            const end = dayjs()
+                            const start = dayjs().add(-6, "month")
+                            picker.$emit("pick", [start, end])
+                        },
+                    },
+                    {
+                        text: "一年内",
+                        onClick(picker) {
+                            const end = dayjs()
+                            const start = dayjs().add(-1, "year")
+                            picker.$emit("pick", [start, end])
+                        },
+                    },
+                    {
+                        text: "十年内",
+                        onClick(picker) {
+                            const end = dayjs()
+                            const start = dayjs().add(-10, "year")
+                            picker.$emit("pick", [start, end])
+                        },
+                    },
+                    {
+                        text: "一伯年内",
+                        onClick(picker) {
+                            const end = dayjs()
+                            const start = dayjs().add(-100, "year")
+                            picker.$emit("pick", [start, end])
+                        },
+                    },
+                ],
             },
-            timeRange: [moment().day(-6), moment()],
+            timeRange: [dayjs().add(-7, "day"), dayjs()],
+            startVal: 0,
+            endVal: 0,
+            interval: null,
         }
     },
 
     created() {
         this.changeAvatarpersonalColor()
+        this.getRealTimeFansNumber()
+        this.interval = setInterval(this.getRealTimeFansNumber, 1000 * 10)
     },
     methods: {
         changeAvatarpersonalColor() {
@@ -87,18 +148,31 @@ export default {
                 .getElementsByTagName("body")[0]
                 .style.setProperty("--border-color", this.person.color)
         },
-        moment,
+        dayjs,
         timeRangeChange(nv) {
-            console.log(nv)
             if (!nv[0]) {
                 return
             }
-            let start = nv[0]._d
-            let end = nv[1]._d
+            let start = nv[0]
+            let end = nv[1]
             if ((end - start) / (1000 * 60 * 60) < 1) {
-                Message.error("最小时间粒度为1小时")
+                return this.$message.error("最小时间粒度为1小时")
             }
         },
+        getRealTimeFansNumber() {
+            getRealTimeFansNumber({ name: this.person.name })
+                .then(res => {
+                    let { data } = res
+                    this.startVal = this.endVal
+                    this.endVal = data
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+    },
+    beforeDestroy() {
+        clearInterval(this.interval)
     },
 }
 </script>
@@ -174,6 +248,7 @@ $personalColor: var(--border-color, #fff);
 
 .toolbar {
     margin: 40px 0px;
+    color: #606266;
     .tip {
         margin-right: 14px;
     }
@@ -185,3 +260,5 @@ $personalColor: var(--border-color, #fff);
     width: 0px;
 }
 </style>
+
+

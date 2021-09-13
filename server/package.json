@@ -10,13 +10,15 @@
     "license": "ISC",
     "dependencies": {
         "cors": "^2.8.5",
+        "dayjs": "^1.10.7",
         "express": "^4.17.1",
+        "meeko": "^1.8.179",
         "mongoose": "^6.0.5",
         "node-schedule": "^2.0.0",
         "request": "^2.88.2"
     },
     "imports": {
         "#root/*": "./*",
-        "#models/*": "./models/*"
+        "#model/*": "./model/*"
     }
 }
