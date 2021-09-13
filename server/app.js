@@ -4,8 +4,7 @@ let mongoose = require("mongoose")
 
 let config = require("./config/default.json")
 
-let remote = require("./router/remote/index.js")
-let local = require("./router/local/index.js")
+let api = require("./router/api.js")
 
 let app = express()
 
@@ -18,8 +17,7 @@ app.use(
 
 app.use(express.json())
 
-app.use("/remote", remote)
-app.use("/local", local)
+app.use("/api", api)
 
 let { mongoUrl } = config
 
