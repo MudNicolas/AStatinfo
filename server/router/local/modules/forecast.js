@@ -39,7 +39,6 @@ router.get("/", (req, res) => {
             let { a: k, b } = math.linearFitting(linearDataX, linearDataY)
             let result = targetFansNumberArray.map(e => {
                 let step = (e - b) / k
-                console.log(step)
                 const TIME_INTERVAL = 10
                 let totalMinute = step * TIME_INTERVAL
                 return {

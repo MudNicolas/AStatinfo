@@ -17,17 +17,9 @@
                 <svg-icon :icon-class="`${person.name}_FANS`" style="margin: 8px" />
                 <countTo :startVal="startVal" :endVal="endVal" :duration="2000"></countTo>
             </div>
-            <div class="item">
-                <span class="title">预计五十万粉时间</span>
-                <span class="forecast">2020.02.02</span>
-            </div>
-            <div class="item">
-                <span class="title">预计百万粉时间</span>
-                <span class="forecast">2020.02.02</span>
-            </div>
-            <div class="item">
-                <span class="title">预计七十亿粉时间</span>
-                <span class="forecast">2020.02.02</span>
+            <div class="item" v-for="e of forecast" :key="e.title">
+                <span class="title">预计{{ e.number | bigNumberTransform }}粉时间</span>
+                <span class="forecast">{{ e.forecast | normalFormatTime }}</span>
             </div>
         </div>
         <div class="toolbar">
@@ -54,14 +46,42 @@ import countTo from "vue-count-to"
 import Charts from "@/components/Charts"
 import dayjs from "dayjs"
 import { getRealTimeFansNumber } from "@/api/remote"
+import { getForecast } from "@/api/local"
+import { normalFormatTime, bigNumberTransform } from "@/utils"
 
 export default {
     props: {
         person: Object,
     },
     components: { countTo, Charts },
+    filters: {
+        normalFormatTime: v => {
+            if (!v) return
+            let d = new Date(v)
+            if (new Date(v).toString() === "Invalid Date") return
+            if (new Date() > d) return "拿下！"
+            return `${normalFormatTime(new Date(v), "{y}/{m}/{d} {h}:{i}")}`
+        },
+        bigNumberTransform: v => {
+            return bigNumberTransform(v)
+        },
+    },
     data() {
         return {
+            forecast: [
+                {
+                    number: 500000,
+                    forecast: "--",
+                },
+                {
+                    title: 1000000,
+                    value: "--",
+                },
+                {
+                    title: 7000000000,
+                    value: "--",
+                },
+            ],
             quickRange: {
                 shortcuts: [
                     {
@@ -140,6 +160,7 @@ export default {
     created() {
         this.changeAvatarpersonalColor()
         this.getRealTimeFansNumber()
+        this.getForecast()
         this.interval = setInterval(this.getRealTimeFansNumber, 1000 * 10)
     },
     methods: {
@@ -165,6 +186,16 @@ export default {
                     let { data } = res
                     this.startVal = this.endVal
                     this.endVal = data
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        getForecast() {
+            getForecast({ name: this.person.name })
+                .then(res => {
+                    let { data } = res
+                    this.forecast = data
                 })
                 .catch(err => {
                     console.log(err)
