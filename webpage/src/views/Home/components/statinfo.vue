@@ -39,7 +39,7 @@
                 ></el-date-picker>
             </span>
         </div>
-        <div v-loading="chartDataLoading">
+        <div v-loading="chartDataLoading" class="chart-area">
             <Charts
                 :color="person.color"
                 :title="person.fansName"
@@ -259,6 +259,9 @@ $personalColor: var(--border-color, #fff);
     .header {
         flex-direction: column;
     }
+    .chart-area {
+        height: 300px;
+    }
 }
 
 @media (min-width: 500px) {
@@ -267,6 +270,9 @@ $personalColor: var(--border-color, #fff);
     }
     .header {
         flex-direction: row;
+    }
+    .chart-area {
+        height: 600px;
     }
 }
 

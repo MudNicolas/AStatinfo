@@ -1,8 +1,8 @@
 <template>
-    <div>
-        <a target="_blank" :href="link" class="my-link">
-            <img src="//www.bilibili.com/favicon.ico" width="20px" />
-            {{ message }}
+    <div class="footer">
+        <a v-for="e of links" target="_blank" :href="e.link" class="link">
+            <svg-icon :icon-class="e.icon" style="width: 22px; margin-right: 6px" />
+            {{ e.message }}
         </a>
     </div>
 </template>
@@ -11,24 +11,39 @@
 export default {
     data() {
         return {
-            message: "bili@枝江大学教育系草教授",
-            link: "https://space.bilibili.com/8044179",
+            links: [
+                {
+                    message: "bili@枝江大学教育系草教授",
+                    link: "https://space.bilibili.com/8044179",
+                    icon: "bilibili",
+                },
+                {
+                    message: "Github@MudNicolas",
+                    link: "https://github.com/MudNicolas/AStatinfo",
+                    icon: "github",
+                },
+            ],
         }
     },
 }
 </script>
 
 <style lang="scss" scpoed >
-.my-link {
-    text-decoration: none;
-    color: #000;
-    display: flex;
-    justify-content: center;
+.footer {
     margin-top: 50px;
-    padding-bottom: 20px;
+    margin-bottom: 20px;
 
-    img {
-        margin-right: 8px;
+    .link {
+        text-decoration: none;
+        display: flex;
+        color: #606266;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            margin-right: 8px;
+        }
     }
 }
 </style>

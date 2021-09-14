@@ -10,6 +10,7 @@
                 :person="config[activeKey]"
             />
         </transition>
+        <Tip />
         <Footer />
     </div>
 </template>
@@ -19,6 +20,7 @@ import config from "@/config/conf.json"
 import Nav from "./components/nav.vue"
 import Acao from "./components/acao.vue"
 import Statinfo from "./components/statinfo.vue"
+import Tip from "./components/tip.vue"
 import Footer from "./components/footer.vue"
 
 export default {
@@ -28,6 +30,7 @@ export default {
         Acao,
         Statinfo,
         Footer,
+        Tip,
     },
     data() {
         return {

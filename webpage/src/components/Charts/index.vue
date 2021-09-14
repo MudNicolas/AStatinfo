@@ -78,7 +78,7 @@ export default {
                 },
                 grid: {
                     x: 70,
-                    x2: 10,
+                    x2: 50,
                     y2: 20,
                 },
                 xAxis: {
