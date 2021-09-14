@@ -19,7 +19,9 @@
             </div>
             <div class="item" v-for="e of forecast" :key="e.title">
                 <span class="title">预计{{ e.number | bigNumberTransform }}粉时间</span>
-                <span class="forecast">{{ e.forecast | normalFormatTime }}</span>
+                <span class="forecast">
+                    {{ e.forecast | normalFormatTime(e.number, currentVal) }}
+                </span>
             </div>
         </div>
         <div class="toolbar">
@@ -37,7 +39,9 @@
                 ></el-date-picker>
             </span>
         </div>
-        <Charts :color="person.color" :title="person.fansName" />
+        <div v-loading="chartDataLoading">
+            <Charts :color="person.color" :title="person.fansName" />
+        </div>
     </div>
 </template>
 
@@ -55,19 +59,20 @@ export default {
     },
     components: { countTo, Charts },
     filters: {
-        normalFormatTime: v => {
+        normalFormatTime: (v, targetNumber, currentVal) => {
             if (!v) return
             let d = new Date(v)
             if (new Date(v).toString() === "Invalid Date") return
-            if (new Date() > d) return "拿下！"
+            if (currentVal > targetNumber) return "拿下！"
             return `${normalFormatTime(new Date(v), "{y}/{m}/{d} {h}:{i}")}`
         },
         bigNumberTransform: v => {
-            return bigNumberTransform(v)
+            return ` ${bigNumberTransform(v)} `
         },
     },
     data() {
         return {
+            chartDataLoading: false,
             forecast: [
                 {
                     number: 500000,
@@ -153,6 +158,7 @@ export default {
             timeRange: [dayjs().add(-7, "day"), dayjs()],
             startVal: 0,
             endVal: 0,
+            currentVal: 0,
             interval: null,
         }
     },
@@ -184,8 +190,10 @@ export default {
             getRealTimeFansNumber({ name: this.person.name })
                 .then(res => {
                     let { data } = res
+
                     this.startVal = this.endVal
                     this.endVal = data
+                    this.currentVal = data
                 })
                 .catch(err => {
                     console.log(err)
@@ -201,6 +209,9 @@ export default {
                     console.log(err)
                 })
         },
+        getChartData() {
+            this.chartDataLoading = true
+        },
     },
     beforeDestroy() {
         clearInterval(this.interval)
@@ -211,7 +222,7 @@ export default {
 <style lang='scss' scoped>
 $personalColor: var(--border-color, #fff);
 
-@media only screen and (max-device-width: 800px) {
+@media (max-width: 800px) {
     .container {
         padding: 20px 10px;
     }
@@ -220,7 +231,7 @@ $personalColor: var(--border-color, #fff);
     }
 }
 
-@media screen and (min-width: 500px) {
+@media (min-width: 500px) {
     .container {
         padding: 80px;
     }
@@ -231,6 +242,7 @@ $personalColor: var(--border-color, #fff);
 
 .header {
     display: flex;
+    flex-wrap: wrap;
 
     .info {
         display: flex;
@@ -266,13 +278,16 @@ $personalColor: var(--border-color, #fff);
 
         .title {
             font-size: 18px;
+            margin-bottom: 6px;
         }
         .content {
             display: flex;
             align-items: center;
+            margin-top: 6px;
         }
         .forecast {
-            margin-top: 8px;
+            margin-top: 6px;
+            text-align: center;
         }
     }
 }
@@ -287,8 +302,10 @@ $personalColor: var(--border-color, #fff);
 </style>
 
 <style >
-.ant-calendar-time-picker-select::-webkit-scrollbar {
-    width: 0px;
+.el-date-editor--datetimerange.el-input,
+.el-date-editor--datetimerange.el-input__inner {
+    width: 350px;
+    margin-top: 8px;
 }
 </style>
 
