@@ -50,7 +50,7 @@ import countTo from "vue-count-to"
 import Charts from "@/components/Charts"
 import dayjs from "dayjs"
 import { getRealTimeFansNumber } from "@/api/remote"
-import { getForecast } from "@/api/local"
+import { getForecast, getChartData } from "@/api/local"
 import { normalFormatTime, bigNumberTransform } from "@/utils"
 
 export default {
@@ -167,6 +167,7 @@ export default {
         this.changeAvatarpersonalColor()
         this.getRealTimeFansNumber()
         this.getForecast()
+        this.getChartData()
         this.interval = setInterval(this.getRealTimeFansNumber, 1000 * 10)
     },
     methods: {
@@ -185,15 +186,15 @@ export default {
             if ((end - start) / (1000 * 60 * 60) < 1) {
                 return this.$message.error("最小时间粒度为1小时")
             }
+            this.getChartData()
         },
         getRealTimeFansNumber() {
             getRealTimeFansNumber({ name: this.person.name })
                 .then(res => {
-                    let { data } = res
-
+                    let { follower } = res
                     this.startVal = this.endVal
-                    this.endVal = data
-                    this.currentVal = data
+                    this.endVal = follower
+                    this.currentVal = follower
                 })
                 .catch(err => {
                     console.log(err)
@@ -202,8 +203,8 @@ export default {
         getForecast() {
             getForecast({ name: this.person.name })
                 .then(res => {
-                    let { data } = res
-                    this.forecast = data
+                    let { result } = res
+                    this.forecast = result
                 })
                 .catch(err => {
                     console.log(err)
@@ -211,6 +212,15 @@ export default {
         },
         getChartData() {
             this.chartDataLoading = true
+            let formatTimeRange = this.timeRange.map(e => {
+                return e.toDate()
+            })
+            let query = { name: this.person.name, timeRange: formatTimeRange }
+            getChartData(query)
+                .then(res => {
+                    console.log(res)
+                })
+                .catch(err => console.log(err))
         },
     },
     beforeDestroy() {

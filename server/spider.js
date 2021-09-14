@@ -1,5 +1,5 @@
 let request = require("request")
-let config = require("./config/api_config.json")
+let config = require("./config/remote_config.json")
 let schedule = require("node-schedule")
 let mongoose = require("mongoose")
 let Follower = require("./model/Follower.js")

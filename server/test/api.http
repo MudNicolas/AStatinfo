@@ -1,3 +1,6 @@
 
 
 GET http://127.0.0.1:9999/api/local/forecast?name=AVA
+
+###
+GET http://127.0.0.1:9999/api/local/chart?name=CAROL&timeRange[]=2021-09-14T01:38:23.563Z&timeRange[]=2021-09-14T03:48:23.563Z

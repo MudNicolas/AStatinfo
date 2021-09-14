@@ -1,5 +1,6 @@
 {
     "port": 9999,
     "mongoUrl": "mongodb://localhost:27999/AStatinfo",
-    "forecastDayRange": 14
+    "forecastDayRange": 14,
+    "maxChartDataLength": 12
 }
