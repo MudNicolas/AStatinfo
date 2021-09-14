@@ -287,6 +287,7 @@ $personalColor: var(--border-color, #fff);
         .avatar {
             border-radius: 50%;
             width: 100px;
+            height: 100px;
             border: 6px solid $personalColor;
             margin-right: 16px;
         }
