@@ -40,7 +40,12 @@
             </span>
         </div>
         <div v-loading="chartDataLoading">
-            <Charts :color="person.color" :title="person.fansName" />
+            <Charts
+                :color="person.color"
+                :title="person.fansName"
+                :chartData="echartData"
+                v-if="!chartDataLoading"
+            />
         </div>
     </div>
 </template>
@@ -160,6 +165,10 @@ export default {
             endVal: 0,
             currentVal: 0,
             interval: null,
+            echartData: {
+                xData: [],
+                yData: [],
+            },
         }
     },
 
@@ -218,7 +227,18 @@ export default {
             let query = { name: this.person.name, timeRange: formatTimeRange }
             getChartData(query)
                 .then(res => {
-                    console.log(res)
+                    let { chatData } = res
+                    let formatXData = chatData.map(e => {
+                        return normalFormatTime(new Date(e.time), "{y}/{m}/{d} {h}:{i}")
+                    })
+                    let formatYData = chatData.map(e => {
+                        return e.numberFollowers
+                    })
+                    this.echartData = {
+                        xData: formatXData,
+                        yData: formatYData,
+                    }
+                    this.chartDataLoading = false
                 })
                 .catch(err => console.log(err))
         },

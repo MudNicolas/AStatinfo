@@ -35,6 +35,13 @@ export default {
             default: "#9AC8E2",
         },
         title: String,
+        chartData: {
+            type: Object,
+            default: () => ({
+                xData: [],
+                yData: [],
+            }),
+        },
     },
     data() {
         return {
@@ -77,15 +84,16 @@ export default {
                 xAxis: {
                     type: "category",
                     boundaryGap: false,
-                    data: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"],
+                    data: this.chartData.xData,
                 },
                 yAxis: {
                     type: "value",
+                    scale: true,
                 },
 
                 series: [
                     {
-                        data: [820, 932, 901, 934, 1290, 1330, 1320, 1245, 2353464, 45758, 124, 55],
+                        data: this.chartData.yData,
                         type: "line",
                         areaStyle: {
                             opacity: 0.8,
