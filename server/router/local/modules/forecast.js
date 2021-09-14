@@ -50,7 +50,7 @@ router.get("/", (req, res) => {
             })
             res.json({
                 code: 20000,
-                data: result,
+                data: { result },
             })
         })
 })

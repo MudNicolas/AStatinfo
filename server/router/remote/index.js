@@ -29,7 +29,7 @@ router.get("/fans/realtime", (req, res) => {
         let { follower } = JSON.parse(body).data
         return res.json({
             code: 20000,
-            data: follower,
+            data: { follower },
         })
     })
 })
