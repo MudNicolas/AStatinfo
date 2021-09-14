@@ -17,13 +17,18 @@ router.get("/fans/realtime", (req, res) => {
     }
     request.get(option, (err, response, body) => {
         if (err) {
-            return res.status(500).end()
+            return res.json({
+                message: "远程服务器错误",
+            })
         }
         if (response.statusCode !== 200) {
-            return res.status(response.statusCode).end()
+            return res.json({
+                message: "服务器状态错误",
+            })
         }
         let { follower } = JSON.parse(body).data
         return res.json({
+            code: 20000,
             data: follower,
         })
     })

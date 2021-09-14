@@ -7,3 +7,11 @@ export function getForecast(query) {
         params: query,
     })
 }
+
+export function getChartData(query) {
+    return request({
+        url: "/local/chart",
+        method: "GET",
+        params: query,
+    })
+}

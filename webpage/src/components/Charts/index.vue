@@ -50,7 +50,6 @@ export default {
     methods: {
         initChart() {
             this.chart = echarts.init(this.$el)
-
             let option = {
                 title: {
                     text: this.title,

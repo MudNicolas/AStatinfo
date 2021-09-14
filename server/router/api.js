@@ -12,7 +12,9 @@ router.use((req, res, next) => {
     let { query } = api_config
     let e = query.find(i => i.name === name)
     if (!e) {
-        return res.status(404).end()
+        return res.json({
+            message: "输入错误",
+        })
     }
     req.tuid = e.uid
     next()

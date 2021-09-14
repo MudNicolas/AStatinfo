@@ -5,15 +5,17 @@ import router from "./router"
 import store from "./store"
 import "./icons"
 
-import { DatePicker, Button, Message } from "element-ui"
+import { DatePicker, Button, Message, Loading } from "element-ui"
 
-Message.install = function(Vue, options) {
+Message.install = function(Vue) {
     Vue.prototype.$message = Message
 }
 
 Vue.use(DatePicker)
 Vue.use(Message)
 Vue.use(Button)
+Vue.use(Loading)
+Vue.use(Loading.directive)
 
 Vue.config.productionTip = false
 

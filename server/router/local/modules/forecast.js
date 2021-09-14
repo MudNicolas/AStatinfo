@@ -28,7 +28,9 @@ router.get("/", (req, res) => {
         .select("numberFollowers")
         .then((data, err) => {
             if (err) {
-                return res.status(500).end()
+                return res.json({
+                    message: "服务器错误",
+                })
             }
             let linearDataY = data.map(e => {
                 return e.numberFollowers
@@ -47,6 +49,7 @@ router.get("/", (req, res) => {
                 }
             })
             res.json({
+                code: 20000,
                 data: result,
             })
         })
