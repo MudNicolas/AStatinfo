@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { getTips } from "@/api/local"
+import { getTips } from "@/api/page"
 export default {
     data() {
         return {
