@@ -26,10 +26,10 @@
         </div>
         <div class="toolbar">
             <span class="tip">数据查看范围</span>
-            <span class="picker">
+            <span class="range-picker">
                 <el-date-picker
                     v-model="timeRange"
-                    :picker-options="quickRange"
+                    :picker-options="quickRangeOptions"
                     type="datetimerange"
                     range-separator="~"
                     start-placeholder="开始日期"
@@ -38,6 +38,30 @@
                     @change="timeRangeChange"
                 ></el-date-picker>
             </span>
+            <div class="devided-picker">
+                <el-date-picker
+                    v-model="timeRange[0]"
+                    size="small"
+                    type="datetime"
+                    placeholder="开始时间"
+                ></el-date-picker>
+                ~
+                <el-date-picker
+                    v-model="timeRange[1]"
+                    size="small"
+                    type="datetime"
+                    placeholder="截止时间"
+                ></el-date-picker>
+                <el-button
+                    size="mini"
+                    type="primary"
+                    @click="timeRangeChange(timeRange)"
+                    style="margin-top: 8px"
+                    :loading="buttonLoading"
+                >
+                    狠狠地查看
+                </el-button>
+            </div>
         </div>
         <div v-loading="chartDataLoading" class="chart-area">
             <Charts
@@ -78,6 +102,7 @@ export default {
     data() {
         return {
             chartDataLoading: false,
+            buttonLoading: false,
             forecast: [
                 {
                     number: 500000,
@@ -92,7 +117,7 @@ export default {
                     value: "--",
                 },
             ],
-            quickRange: {
+            quickRangeOptions: {
                 shortcuts: [
                     {
                         text: "今日",
@@ -192,6 +217,9 @@ export default {
             }
             let start = nv[0]
             let end = nv[1]
+            if (start >= end) {
+                return this.$message.error("时间魔法不可取")
+            }
             if ((end - start) / (1000 * 60 * 60) < 1) {
                 return this.$message.error("最小时间粒度为1小时")
             }
@@ -221,6 +249,7 @@ export default {
         },
         getChartData() {
             this.chartDataLoading = true
+            this.buttonLoading = true
             let formatTimeRange = this.timeRange.map(e => {
                 return e.toDate()
             })
@@ -239,8 +268,12 @@ export default {
                         yData: formatYData,
                     }
                     this.chartDataLoading = false
+                    this.buttonLoading = false
                 })
-                .catch(err => console.log(err))
+                .catch(err => {
+                    console.log(err)
+                    this.buttonLoading = false
+                })
         },
     },
     beforeDestroy() {
@@ -262,6 +295,10 @@ $personalColor: var(--border-color, #fff);
     .chart-area {
         height: 300px;
     }
+
+    .range-picker {
+        display: none;
+    }
 }
 
 @media (min-width: 500px) {
@@ -273,6 +310,10 @@ $personalColor: var(--border-color, #fff);
     }
     .chart-area {
         height: 600px;
+    }
+
+    .devided-picker {
+        display: none;
     }
 }
 
@@ -336,13 +377,29 @@ $personalColor: var(--border-color, #fff);
         margin-right: 14px;
     }
 }
+
+.devided-picker {
+    margin-top: 8px;
+}
 </style>
 
 <style >
-.el-date-editor--datetimerange.el-input,
-.el-date-editor--datetimerange.el-input__inner {
-    width: 350px;
-    margin-top: 8px;
+@media (min-width: 500px) {
+    .el-date-editor--datetimerange.el-input,
+    .el-date-editor--datetimerange.el-input__inner {
+        width: 350px;
+        margin-top: 8px;
+    }
+}
+
+@media (max-width: 800px) {
+    .el-date-editor.el-input,
+    .el-date-editor.el-input__inner {
+        width: 160px;
+    }
+    .el-input--suffix .el-input__inner {
+        padding-right: 0px;
+    }
 }
 </style>
 
