@@ -1,43 +1,43 @@
 {
-    "AVA": {
-        "name": "AVA",
-        "cname": "向晚",
-        "avatar": "https://i0.hdslb.com/bfs/face/566078c52b408571d8ae5e3bcdf57b2283024c27.jpg",
-        "stand": "https://i0.hdslb.com/bfs/album/292e0f33e6be3df029f0723a2e712ca59af7e1cd.jpg@518h.webp",
-        "fansName": "顶碗人",
-        "color": "#9AC8E2"
-    },
-    "BELLA": {
-        "name": "BELLA",
-        "cname": "贝拉",
-        "avatar": "https://i2.hdslb.com/bfs/face/668af440f8a8065743d3fa79cfa8f017905d0065.jpg",
-        "stand": "https://i0.hdslb.com/bfs/album/9fff92e6c825c2f5b70a5e5c58a71961939c1ad3.jpg@518h.webp",
-        "fansName": "贝极星",
-        "color": "#BD7D74"
-    },
-    "CAROL": {
-        "name": "CAROL",
-        "cname": "珈乐",
-        "avatar": "https://i1.hdslb.com/bfs/face/a7fea00016a8d3ffb015b6ed8647cc3ed89cbc63.jpg",
-        "stand": "https://i0.hdslb.com/bfs/album/899ad91ca71cf01d32b7bc79d46ed88d96b2cc40.jpg@518h.webp",
-        "fansName": "皇珈骑士",
-        "color": "#B8A6D9"
-    },
-    "DIANA": {
-        "name": "DIANA",
-        "cname": "嘉然",
-        "stand": "https://i0.hdslb.com/bfs/album/e21a6273d62335cde7abc7daf2c586d563114257.jpg@518h.webp",
-        "avatar": "https://i2.hdslb.com/bfs/face/d399d6f5cf7943a996ae96999ba3e6ae2a2988de.jpg",
-        "headerImage": "http://i0.hdslb.com/bfs/space/1e457fa3a2b3834e475d6041f20e4ec3cc134527.png",
-        "color": "#E799B0",
-        "fansName": "嘉心糖"
-    },
-    "EILEEN": {
-        "name": "EILEEN",
-        "cname": "乃琳",
-        "avatar": "https://i1.hdslb.com/bfs/face/8895c87082beba1355ea4bc7f91f2786ef49e354.jpg",
-        "stand": "https://i0.hdslb.com/bfs/album/072ef639271f4b20b36cec5c3df6b5335da8a17f.jpg@518h.webp",
-        "fansName": "乃琪琳",
-        "color": "#576690"
-    }
+	"AVA": {
+		"name": "AVA",
+		"cname": "向晚",
+		"avatar": "https://i0.hdslb.com/bfs/face/566078c52b408571d8ae5e3bcdf57b2283024c27.jpg",
+		"stand": "https://i0.hdslb.com/bfs/album/292e0f33e6be3df029f0723a2e712ca59af7e1cd.jpg@518h.webp",
+		"fansName": "顶碗人",
+		"color": "#9AC8E2"
+	},
+	"BELLA": {
+		"name": "BELLA",
+		"cname": "贝拉",
+		"avatar": "https://i2.hdslb.com/bfs/face/668af440f8a8065743d3fa79cfa8f017905d0065.jpg",
+		"stand": "https://i0.hdslb.com/bfs/album/9fff92e6c825c2f5b70a5e5c58a71961939c1ad3.jpg@518h.webp",
+		"fansName": "贝极星",
+		"color": "#BD7D74"
+	},
+	"CAROL": {
+		"name": "CAROL",
+		"cname": "珈乐",
+		"avatar": "https://i1.hdslb.com/bfs/face/a7fea00016a8d3ffb015b6ed8647cc3ed89cbc63.jpg",
+		"stand": "https://i0.hdslb.com/bfs/album/899ad91ca71cf01d32b7bc79d46ed88d96b2cc40.jpg@518h.webp",
+		"fansName": "皇珈骑士",
+		"color": "#B8A6D9"
+	},
+	"DIANA": {
+		"name": "DIANA",
+		"cname": "嘉然",
+		"stand": "https://i0.hdslb.com/bfs/album/e21a6273d62335cde7abc7daf2c586d563114257.jpg@518h.webp",
+		"avatar": "https://i2.hdslb.com/bfs/face/d399d6f5cf7943a996ae96999ba3e6ae2a2988de.jpg",
+		"headerImage": "http://i0.hdslb.com/bfs/space/1e457fa3a2b3834e475d6041f20e4ec3cc134527.png",
+		"color": "#E799B0",
+		"fansName": "嘉心糖"
+	},
+	"EILEEN": {
+		"name": "EILEEN",
+		"cname": "乃琳",
+		"avatar": "https://i1.hdslb.com/bfs/face/8895c87082beba1355ea4bc7f91f2786ef49e354.jpg",
+		"stand": "https://i0.hdslb.com/bfs/album/072ef639271f4b20b36cec5c3df6b5335da8a17f.jpg@518h.webp",
+		"fansName": "乃淇琳",
+		"color": "#576690"
+	}
 }
