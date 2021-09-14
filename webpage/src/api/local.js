@@ -15,3 +15,10 @@ export function getChartData(query) {
         params: query,
     })
 }
+
+export function getTips() {
+    return request({
+        url: "/local/tips/get",
+        method: "GET",
+    })
+}

@@ -7,14 +7,27 @@
 </template>
 
 <script>
+import { getTips } from "@/api/local"
 export default {
     data() {
         return {
-            tips: [
-                "粉丝统计数据从2021年9月13日开始收集，如果有一个魂能提供之前的数据请联系我(￣y▽,￣)╭ ",
-                "粉丝数达成时间预测采用了简单线性回归算法，通过过去两周内的粉丝增长数据来计算当前版本下的涨粉预测，预测结果仅供娱乐参考。（如果服务器吃得消的话可能会换成拟合程度更好的多项式回归模型）",
-            ],
+            tips: [],
         }
+    },
+    created() {
+        this.getTips()
+    },
+    methods: {
+        getTips() {
+            getTips()
+                .then(res => {
+                    let { tips } = res
+                    this.tips = tips
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
     },
 }
 </script>
