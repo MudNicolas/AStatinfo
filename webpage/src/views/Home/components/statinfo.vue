@@ -122,8 +122,8 @@ export default {
                     {
                         text: "一小时内",
                         onClick(picker) {
-                            const end = dayjs()
                             const start = dayjs().add(-1, "hour")
+                            const end = dayjs()
                             picker.$emit("pick", [start, end])
                         },
                     },
