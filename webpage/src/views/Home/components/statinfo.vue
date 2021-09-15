@@ -120,6 +120,22 @@ export default {
             quickRangeOptions: {
                 shortcuts: [
                     {
+                        text: "一小时内",
+                        onClick(picker) {
+                            const end = dayjs()
+                            const start = dayjs().add(-1, "hour")
+                            picker.$emit("pick", [start, end])
+                        },
+                    },
+                    {
+                        text: "两小时内",
+                        onClick(picker) {
+                            const end = dayjs()
+                            const start = dayjs().add(-2, "hour")
+                            picker.$emit("pick", [start, end])
+                        },
+                    },
+                    {
                         text: "今日",
                         onClick(picker) {
                             const end = dayjs()
