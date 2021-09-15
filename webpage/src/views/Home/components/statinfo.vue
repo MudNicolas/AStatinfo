@@ -185,6 +185,7 @@ export default {
                     },
                 ],
             },
+
             timeRange: [dayjs().add(-7, "day"), dayjs()],
             startVal: 0,
             endVal: 0,
@@ -251,7 +252,8 @@ export default {
             this.chartDataLoading = true
             this.buttonLoading = true
             let formatTimeRange = this.timeRange.map(e => {
-                return e.toDate()
+                if (e.toDate) return e.toDate()
+                return e
             })
             let query = { name: this.person.name, timeRange: formatTimeRange }
             getChartData(query)
