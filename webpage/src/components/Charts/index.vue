@@ -126,13 +126,13 @@ export default {
 </script>
 
 <style scoped>
-@media only screen and (max-device-width: 800px) {
+@media (max-width: 768px) {
     .chat-area {
         height: 300px;
     }
 }
 
-@media screen and (min-width: 500px) {
+@media (min-width: 769px) {
     .chat-area {
         height: 600px;
     }

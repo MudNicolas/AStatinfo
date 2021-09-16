@@ -38,11 +38,12 @@ router.get("/", (req, res) => {
             let linearDataX = linearDataY.map((e, index) => {
                 return index
             })
-            let { a: k, b,r } = math.linearFitting(linearDataX, linearDataY)
-            if (r<0.95){
-                console.log("r=",r)
+            let { a: k, b, r } = math.linearFitting(linearDataX, linearDataY)
+
+            if (r < 0.9) {
+                console.log("r=", r, dayjs().format("YYYY-MM-DD HH:mm:ss"), name)
             }
-           
+
             let result = targetFansNumberArray.map(e => {
                 let step = (e - b) / k
                 const TIME_INTERVAL = 10

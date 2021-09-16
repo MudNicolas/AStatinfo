@@ -1,21 +1,21 @@
 {
-	"name": "AStatinfo",
-	"short_name": "AStat",
-	"theme_color": "#4DBA87",
-	"icons": [
-		{
-			"src": "./favicon.ico",
-			"sizes": "64x64",
-			"type": "image/ico"
-		},
-		{
-			"src": "./favicon.ico",
-			"sizes": "64x64",
-			"type": "image/ico",
-			"purpose": "maskable"
-		}
-	],
-	"start_url": ".",
-	"display": "standalone",
-	"background_color": "#000000"
+    "name": "AStatinfo",
+    "short_name": "AStat",
+    "theme_color": "#CDCDCD",
+    "icons": [
+        {
+            "src": "./favicon.ico",
+            "sizes": "64x64",
+            "type": "image/ico"
+        },
+        {
+            "src": "./favicon.ico",
+            "sizes": "64x64",
+            "type": "image/ico",
+            "purpose": "maskable"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#000000"
 }

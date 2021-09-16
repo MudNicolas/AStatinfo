@@ -33,13 +33,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .container {
         margin: 20px 10px 0px 0px;
     }
 }
 
-@media (min-width: 500px) {
+@media (min-width: 769px) {
     .container {
         margin: 20px 80px 0px 80px;
     }

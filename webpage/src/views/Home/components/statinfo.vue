@@ -303,7 +303,7 @@ export default {
 <style lang='scss' scoped>
 $personalColor: var(--border-color, #fff);
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .container {
         padding: 20px 10px;
     }
@@ -319,7 +319,7 @@ $personalColor: var(--border-color, #fff);
     }
 }
 
-@media (min-width: 500px) {
+@media (min-width: 769px) {
     .container {
         padding: 80px;
     }
@@ -402,7 +402,7 @@ $personalColor: var(--border-color, #fff);
 </style>
 
 <style >
-@media (min-width: 500px) {
+@media (min-width: 769px) {
     .el-date-editor--datetimerange.el-input,
     .el-date-editor--datetimerange.el-input__inner {
         width: 350px;
@@ -410,7 +410,7 @@ $personalColor: var(--border-color, #fff);
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .el-date-editor.el-input,
     .el-date-editor.el-input__inner {
         width: 160px;
