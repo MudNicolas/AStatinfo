@@ -1,0 +1,19 @@
+{
+    "apps": [
+        {
+            "name": "AStatinfo_webserver",
+            "script": "app.js",
+            "cwd": "/usr/local/application/AStatinfo/server/",
+            "error_file": "/usr/local/application/AStatinfo/server/logs/error.log",
+            "out_file": "/usr/local/application/AStatinfo/server/logs/out.log",
+            "log_date_format": "YYYY-MM-DD HH:mm:ss",
+            "watch": [
+                "config",
+                "model",
+                "router",
+                "app.js",
+                "pm2.json"
+            ]
+        }
+    ]
+}
