@@ -39,10 +39,8 @@ router.get("/", (req, res) => {
                 return index
             })
             let { a: k, b, r } = math.linearFitting(linearDataX, linearDataY)
-
-            if (r < 0.9) {
-                console.log("r=", r, dayjs().format("YYYY-MM-DD HH:mm:ss"), name)
-            }
+            r = r.toFixed(3)
+            let sig = math.pearson(linearDataX, linearDataY).toFixed(3)
 
             let result = targetFansNumberArray.map(e => {
                 let step = (e - b) / k
@@ -53,9 +51,10 @@ router.get("/", (req, res) => {
                     forecast: dayjs().add(totalMinute, "minute").toDate(),
                 }
             })
+
             res.json({
                 code: 20000,
-                data: { result },
+                data: { result, sig, r },
             })
         })
 })

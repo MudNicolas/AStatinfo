@@ -24,6 +24,7 @@
                 </span>
             </div>
         </div>
+        <div class="explanation" v-if="sig">sig={{ sig }}, r={{ r }}</div>
         <div class="toolbar">
             <span class="tip">数据查看范围</span>
             <span class="range-picker">
@@ -257,8 +258,10 @@ export default {
         getForecast() {
             getForecast({ name: this.person.name })
                 .then(res => {
-                    let { result } = res
+                    let { result, sig, r } = res
                     this.forecast = result
+                    this.sig = sig
+                    this.r = r
                 })
                 .catch(err => {
                     console.log(err)
@@ -387,9 +390,13 @@ $personalColor: var(--border-color, #fff);
         }
     }
 }
-
-.toolbar {
+.explanation {
+    color: #909399;
+    font-size: 13px;
+    letter-spacing: 1px;
     margin: 40px 0px;
+}
+.toolbar {
     color: #606266;
     .tip {
         margin-right: 14px;
