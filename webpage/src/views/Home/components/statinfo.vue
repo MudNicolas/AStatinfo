@@ -16,6 +16,7 @@
                 <span class="title">{{ person.fansName }}</span>
                 <svg-icon :icon-class="`${person.name}_FANS`" style="margin: 8px" />
                 <countTo :startVal="startVal" :endVal="endVal" :duration="2000"></countTo>
+                <div class="realtime-interval">{{ realtime | normalFormatTime }}</div>
             </div>
             <div class="item" v-for="e of forecast" :key="e.title">
                 <span class="title">预计{{ e.number | bigNumberTransform }}粉时间</span>
@@ -94,14 +95,21 @@ export default {
             let d = new Date(v)
             if (new Date(v).toString() === "Invalid Date") return
             if (currentVal > targetNumber) return "拿下！"
-            return `${normalFormatTime(new Date(v), "{y}/{m}/{d} {h}:{i}")}`
+            return `${normalFormatTime(new Date(v), "{y}年{m}月{d}日 {h}:{i}:{s}")}`
         },
         bigNumberTransform: v => {
             return ` ${bigNumberTransform(v)} `
         },
     },
+    mounted() {
+        this.realtimeInterval = setInterval(() => {
+            this.realtime = dayjs().format()
+        }, 1000)
+    },
     data() {
         return {
+            realtime: dayjs().format(),
+            realtimeInterval: null,
             chartDataLoading: false,
             buttonLoading: false,
             forecast: [
@@ -308,6 +316,7 @@ export default {
     },
     beforeDestroy() {
         clearInterval(this.interval)
+        clearInterval(this.realtimeInterval)
     },
 }
 </script>
@@ -404,6 +413,12 @@ $personalColor: var(--border-color, #fff);
     font-size: 13px;
     letter-spacing: 1px;
     margin: 40px 0px;
+}
+.realtime-interval {
+    color: #606266;
+    font-size: 16px;
+
+    margin-top: 10px;
 }
 .toolbar {
     color: #606266;
