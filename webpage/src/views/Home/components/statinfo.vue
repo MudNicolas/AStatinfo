@@ -67,7 +67,7 @@
         <div v-loading="chartDataLoading" class="chart-area">
             <Charts
                 :color="person.color"
-                :title="person.fansName"
+                :title="generateChartTitle()"
                 :chartData="echartData"
                 v-if="!chartDataLoading"
             />
@@ -212,6 +212,7 @@ export default {
                 xData: [],
                 yData: [],
             },
+            newFansNumber: 0,
         }
     },
 
@@ -277,7 +278,7 @@ export default {
             let query = { name: this.person.name, timeRange: formatTimeRange }
             getChartData(query)
                 .then(res => {
-                    let { chatData } = res
+                    let { chatData, newFansNumber } = res
                     let formatXData = chatData.map(e => {
                         return normalFormatTime(new Date(e.time), "{y}/{m}/{d} {h}:{i}")
                     })
@@ -288,6 +289,7 @@ export default {
                         xData: formatXData,
                         yData: formatYData,
                     }
+                    this.newFansNumber = newFansNumber
                     this.chartDataLoading = false
                     this.buttonLoading = false
                 })
@@ -295,6 +297,11 @@ export default {
                     console.log(err)
                     this.buttonLoading = false
                 })
+        },
+        generateChartTitle() {
+            return this.newFansNumber >= 0
+                ? `${person.fansName}(+${this.newFansNumber})`
+                : `${person.fansName}(-${this.newFansNumber})`
         },
     },
     beforeDestroy() {

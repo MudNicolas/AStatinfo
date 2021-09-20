@@ -51,9 +51,10 @@ router.get("/", (req, res) => {
                 }
             })
         }
+        let newFansNumber = list[list.length - 1].numberFollowers - list[0].numberFollowers
         res.json({
             code: 20000,
-            data: { chatData },
+            data: { chatData, newFansNumber },
         })
     })
 })
