@@ -213,6 +213,8 @@ export default {
                 yData: [],
             },
             newFansNumber: 0,
+            sig: 0,
+            r: 0,
         }
     },
 
@@ -300,8 +302,8 @@ export default {
         },
         generateChartTitle() {
             return this.newFansNumber >= 0
-                ? `${person.fansName}(+${this.newFansNumber})`
-                : `${person.fansName}(-${this.newFansNumber})`
+                ? `${this.person.fansName}(+${this.newFansNumber})`
+                : `${this.person.fansName}(-${this.newFansNumber})`
         },
     },
     beforeDestroy() {
