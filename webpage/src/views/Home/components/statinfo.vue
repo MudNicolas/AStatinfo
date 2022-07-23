@@ -91,7 +91,7 @@ export default {
     components: { countTo, Charts },
     filters: {
         normalFormatTime: (v, targetNumber, currentVal) => {
-            if (!v) return
+            if (!v) return "∞"
             let d = new Date(v)
             if (new Date(v).toString() === "Invalid Date") return
             if (currentVal > targetNumber) return "拿下！"
