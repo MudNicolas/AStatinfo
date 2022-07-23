@@ -148,7 +148,10 @@ export default {
                         text: "今日",
                         onClick(picker) {
                             const end = dayjs()
-                            const start = dayjs().set("hour", 0).set("minute", 0).set("second", 0)
+                            const start = dayjs()
+                                .set("hour", 0)
+                                .set("minute", 0)
+                                .set("second", 0)
                             picker.$emit("pick", [start, end])
                         },
                     },
@@ -311,7 +314,7 @@ export default {
         generateChartTitle() {
             return this.newFansNumber >= 0
                 ? `${this.person.fansName}(+${this.newFansNumber})`
-                : `${this.person.fansName}(-${this.newFansNumber})`
+                : `${this.person.fansName}(-${Math.abs(this.newFansNumber)})`
         },
     },
     beforeDestroy() {
@@ -321,7 +324,7 @@ export default {
 }
 </script>
 
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 $personalColor: var(--border-color, #fff);
 
 @media (max-width: 768px) {
@@ -432,7 +435,7 @@ $personalColor: var(--border-color, #fff);
 }
 </style>
 
-<style >
+<style>
 @media (min-width: 769px) {
     .el-date-editor--datetimerange.el-input,
     .el-date-editor--datetimerange.el-input__inner {
@@ -451,5 +454,3 @@ $personalColor: var(--border-color, #fff);
     }
 }
 </style>
-
-
